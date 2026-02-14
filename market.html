@@ -2,14 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Dashboard - AgroSmart</title>
+  <title>Market - AgroSmart</title>
   <link rel="stylesheet" href="assets/css/main.css">
-  <script type="module" src="assets/js/dashboard.js"></script>
 </head>
 <body>
 
 <nav class="navbar">
-  <h2>AgroSmart</h2>
   <ul>
     <li><a href="dashboard.html">Dashboard</a></li>
     <li><a href="animals.html">Animals</a></li>
@@ -19,14 +17,17 @@
   </ul>
 </nav>
 
-<main>
-  <h1>Welcome</h1>
-  <p id="welcomeMessage"></p>
-  <div class="card" id="weatherCard">
-  <h2>Current Weather</h2>
-  <p id="weatherInfo">Loading weather...</p>
-</div>
+<main class="container">
+  <h1>Market Information</h1>
+
+  <div class="card">
+    <h2>Exchange Rate</h2>
+    <p id="exchangeInfo">Loading exchange rate...</p>
+  </div>
+
 </main>
+
+<script type="module" src="assets/js/market.js"></script>
 
 </body>
 </html>
