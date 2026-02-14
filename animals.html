@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Animals - AgroSmart</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <h2>AgroSmart</h2>
+  <ul>
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="animals.html">Animals</a></li>
+  </ul>
+</nav>
+
+<main>
+  <h1>Animal Management</h1>
+
+  <form id="animalForm">
+    <input type="text" id="animalName" placeholder="Animal Name" required>
+    <input type="text" id="animalType" placeholder="Animal Type" required>
+    <button type="submit">Add Animal</button>
+  </form>
+
+  <div id="animalList"></div>
+</main>
+
+<script src="js/animals.js"></script>
+</body>
+</html>
