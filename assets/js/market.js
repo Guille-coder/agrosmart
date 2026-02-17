@@ -1,32 +1,89 @@
-import { getExchangeRate } from "./services/marketService.js";
+import { getMarketData } from "./services/marketService.js";
 
-/* ===============================
-   AUTH CHECK
-================================= */
+const marketContainer = document.getElementById("marketInfo");
+const ctx = document.getElementById("marketChart");
 
-const userEmail = localStorage.getItem("userEmail");
+let chart;
+let priceHistory = {
+  Wheat: [],
+  Corn: [],
+  Rice: [],
+  Soybeans: []
+};
 
-if (!userEmail) {
-  window.location.href = "index.html";
-}
+async function loadMarket() {
+  const data = await getMarketData();
 
-/* ===============================
-   LOAD EXCHANGE DATA
-================================= */
-
-const exchangeInfo = document.getElementById("exchangeInfo");
-
-async function loadExchangeRate() {
-  const rate = await getExchangeRate();
-
-  if (!rate) {
-    exchangeInfo.textContent = "Unable to load exchange rate.";
+  if (!data) {
+    marketContainer.innerHTML =
+      `<div class="market-error">Unable to load market data.</div>`;
     return;
   }
 
-  exchangeInfo.innerHTML = `
-    1 USD = ${rate} PEN
+  // Render cards
+  marketContainer.innerHTML = `
+    <div class="market-grid">
+      ${data.map(item => `
+        <div class="market-card">
+          <h2>${item.name}</h2>
+          <p><strong>Price:</strong> $${item.price}</p>
+          <p>
+            <span class="${item.change >= 0 ? "positive" : "negative"}">
+              ${item.change >= 0 ? "▲" : "▼"} ${item.change}
+            </span>
+          </p>
+        </div>
+      `).join("")}
+    </div>
   `;
+
+  // Update price history
+  data.forEach(item => {
+    priceHistory[item.name].push(item.price);
+
+    if (priceHistory[item.name].length > 10) {
+      priceHistory[item.name].shift();
+    }
+  });
+
+  updateChart();
 }
 
-loadExchangeRate();
+function updateChart() {
+  if (!chart) {
+    chart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: Array(10).fill(""),
+        datasets: Object.keys(priceHistory).map(name => ({
+          label: name,
+          data: priceHistory[name],
+          fill: false,
+          tension: 0.3
+        }))
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: "bottom"
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: false
+          }
+        }
+      }
+    });
+  } else {
+    chart.data.datasets.forEach(dataset => {
+      dataset.data = priceHistory[dataset.label];
+    });
+    chart.update();
+  }
+}
+
+// Auto refresh every 30 seconds
+loadMarket();
+setInterval(loadMarket, 30000);

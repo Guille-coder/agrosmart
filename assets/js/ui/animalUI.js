@@ -6,10 +6,11 @@ export function renderAnimals(container, animals, onDelete) {
     div.classList.add("animal-card");
 
     div.innerHTML = `
-      <h3>${animal.name}</h3>
-      <p>Type: ${animal.type}</p>
-      <button class="btn-delete" data-index="${index}">Delete</button>
-    `;
+    <h3>${animal.name}</h3>
+    <p>Type: ${animal.type}</p>
+    <p>Habitat: ${animal.habitat || "Unknown"}</p>
+    <p>Diet: ${animal.diet || "Unknown"}</p>
+    <button class="btn-delete" data-index="${index}">Delete</button>`;
 
     container.appendChild(div);
   });

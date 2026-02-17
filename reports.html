@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard - AgroSmart</title>
+  <title>Reports - AgroSmart</title>
   <link rel="stylesheet" href="assets/css/main.css">
   <script src="assets/js/navbar.js" defer></script>
-  <script type="module" src="assets/js/dashboard.js"></script>
+
 </head>
 <body>
 
@@ -32,14 +32,13 @@
   </div>
 </nav>
 
-<main>
-  <h1>Welcome</h1>
-  <p id="welcomeMessage"></p>
-  <div class="card" id="weatherCard">
-  <h2>Current Weather</h2>
-  <p id="weatherInfo">Loading weather...</p>
-</div>
+<main class="container">
+  <h1>System Reports</h1>
+  <div id="reportsContainer"></div>
 </main>
+<button id="exportPDF" class="btn-primary">
+  Export Report to PDF
+</button>
 <footer class="footer">
   <div class="footer-container">
     
@@ -68,5 +67,7 @@
     © 2026 AgroSmart. All rights reserved.
   </div>
 </footer>
+  <script type="module" src="assets/js/reports.js"></script>
+
 </body>
 </html>

@@ -2,19 +2,34 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Market - AgroSmart</title>
   <link rel="stylesheet" href="assets/css/main.css">
+  <script src="assets/js/navbar.js" defer></script>
+
 </head>
 <body>
 
 <nav class="navbar">
-  <ul>
-    <li><a href="dashboard.html">Dashboard</a></li>
-    <li><a href="animals.html">Animals</a></li>
-    <li><a href="inventory.html">Inventory</a></li>
-    <li><a href="market.html">Market</a></li>
-    <li><a href="reports.html">Reports</a></li>
-  </ul>
+  <div class="nav-container">
+
+    <div class="logo">AgroSmart</div>
+
+    <button class="menu-toggle" id="menuToggle">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="animals.html">Animals</a></li>
+      <li><a href="inventory.html">Inventory</a></li>
+      <li><a href="market.html">Market</a></li>
+      <li><a href="reports.html">Reports</a></li>
+    </ul>
+
+  </div>
 </nav>
 
 <main class="container">
@@ -24,9 +39,43 @@
     <h2>Exchange Rate</h2>
     <p id="exchangeInfo">Loading exchange rate...</p>
   </div>
+  <div id="marketInfo"></div>
+  <div id="marketInfo"></div>
+
+  <div class="chart-container">
+    <canvas id="marketChart"></canvas>
+  </div>
 
 </main>
+<footer class="footer">
+  <div class="footer-container">
+    
+    <div class="footer-column">
+      <h4>AgroSmart</h4>
+      <p>Smart farm management system designed for modern agriculture.</p>
+    </div>
 
+    <div class="footer-column">
+      <h4>Modules</h4>
+      <p><a href="dashboard.html">Dashboard</a></p>
+      <p><a href="animals.html">Animals</a></p>
+      <p><a href="inventory.html">Inventory</a></p>
+      <p><a href="market.html">Market</a></p>
+    </div>
+
+    <div class="footer-column">
+      <h4>Project Info</h4>
+      <p>Web Development Project</p>
+      <p>2026</p>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 AgroSmart. All rights reserved.
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script type="module" src="assets/js/market.js"></script>
 
 </body>

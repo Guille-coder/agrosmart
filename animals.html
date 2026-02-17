@@ -1,32 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Animals - AgroSmart</title>
-    <link rel="stylesheet" href="assets/css/main.css">
-    <script type="module" src="js/animals.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Animals | AgroSmart</title>
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <script src="assets/js/navbar.js" defer></script>
+  <script type="module" src="assets/js/animals.js"></script>
+
 </head>
+
 <body>
 
-<nav class="navbar">
-  <h2>AgroSmart</h2>
-  <ul>
-    <li><a href="dashboard.html">Dashboard</a></li>
-    <li><a href="animals.html">Animals</a></li>
-  </ul>
+  <nav class="navbar">
+  <div class="nav-container">
+
+    <div class="logo">Farm Animals</div>
+
+    <button class="menu-toggle" id="menuToggle">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="animals.html">Animals</a></li>
+      <li><a href="inventory.html">Inventory</a></li>
+      <li><a href="market.html">Market</a></li>
+      <li><a href="reports.html">Reports</a></li>
+    </ul>
+
+  </div>
 </nav>
 
-<main>
-  <h1>Animal Management</h1>
 
-  <form id="animalForm">
-    <input type="text" id="animalName" placeholder="Animal Name" required>
-    <input type="text" id="animalType" placeholder="Animal Type" required>
-    <button type="submit">Add Animal</button>
-  </form>
+  <main class="container">
 
-  <div id="animalList"></div>
-</main>
+    <!-- FORM -->
+    <section class="card">
+      <h2>Add Animal</h2>
 
+      <form id="animalForm" class="form">
+        <input type="text" id="animalName" placeholder="Animal Name" required />
+        <input type="text" id="animalType" placeholder="Animal Type (cow, pig, sheep)" required />
+        <button type="submit" class="btn-primary">Add Animal</button>
+      </form>
+    </section>
+
+    <!-- LIST -->
+    <section class="card">
+      <h2>Animal List</h2>
+      <div id="animalList" class="animal-grid"></div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+  <div class="footer-container">
+    
+    <div class="footer-column">
+      <h4>AgroSmart</h4>
+      <p>Smart farm management system designed for modern agriculture.</p>
+    </div>
+
+    <div class="footer-column">
+      <h4>Modules</h4>
+      <p><a href="dashboard.html">Dashboard</a></p>
+      <p><a href="animals.html">Animals</a></p>
+      <p><a href="inventory.html">Inventory</a></p>
+      <p><a href="market.html">Market</a></p>
+    </div>
+
+    <div class="footer-column">
+      <h4>Project Info</h4>
+      <p>Web Development Project</p>
+      <p>2026</p>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 AgroSmart. All rights reserved.
+  </div>
+</footer>
 </body>
 </html>

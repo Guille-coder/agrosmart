@@ -1,3 +1,6 @@
+window.addEventListener("load", () => {
+  document.body.classList.add("page-loaded");
+});
 const loginForm = document.getElementById("loginForm");
 
 if (loginForm) {
