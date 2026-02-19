@@ -2,6 +2,9 @@ import { getMarketData } from "./services/marketService.js";
 
 const container = document.getElementById("reportsContainer");
 
+if (!container) {
+  console.warn("Reports container not found");
+}
 function getAnimals() {
   return JSON.parse(localStorage.getItem("animals")) || [];
 }
@@ -19,7 +22,7 @@ async function loadReports() {
 
   const wheat = marketData.find(item => item.name === "Wheat");
 
-  // 🔹 ANIMAL ANALYTICS
+  //  ANIMAL ANALYTICS
   const totalAnimals = animals.length;
 
   const animalTypesMap = {};
@@ -32,7 +35,7 @@ async function loadReports() {
     ? (totalAnimals / animalTypesCount).toFixed(2)
     : 0;
 
-  // 🔹 INVENTORY ANALYTICS
+  //  INVENTORY ANALYTICS
   const totalInventoryItems = inventory.length;
 
   const totalInventoryQuantity = inventory.reduce(
@@ -44,7 +47,7 @@ async function loadReports() {
     ? (totalInventoryQuantity / totalInventoryItems).toFixed(2)
     : 0;
 
-  // 🔹 MARKET ANALYTICS
+  //  MARKET ANALYTICS
   const avgMarketChange =
     marketData.length > 0
       ? (
@@ -100,7 +103,22 @@ async function loadReports() {
   `;
 }
 
+/* ==============================
+   INIT REPORTS
+================================= */
+
 loadReports();
+
+/* ===============================
+   LIVE UPDATE EVENTS
+================================= */
+
+window.addEventListener("storage", loadReports);
+window.addEventListener("focus", loadReports);
+
+/* ===============================
+   EXPORT PDF
+================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
   const exportBtn = document.getElementById("exportPDF");

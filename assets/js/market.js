@@ -11,22 +11,64 @@ let priceHistory = {
   Soybeans: []
 };
 
+function getMarketHistory() {
+  return JSON.parse(localStorage.getItem("agrosmart_market_history")) || [];
+}
+
+function saveMarketHistory(history) {
+  localStorage.setItem(
+    "agrosmart_market_history",
+    JSON.stringify(history)
+  );
+}
 async function loadMarket() {
   const data = await getMarketData();
 
-  if (!data) {
+  if (!data || !Array.isArray(data)) {
     marketContainer.innerHTML =
       `<div class="market-error">Unable to load market data.</div>`;
     return;
   }
 
-  // Render cards
+  /* ===============================
+     JSON NORMALIZATION (REQUIREMENT)
+  =============================== */
+
+  const marketSnapshot = data.map(item => ({
+    name: item.name,
+    price: Number(item.price),
+    change: Number(item.change),
+    timestamp: new Date().toISOString(),
+    trend: item.change >= 0 ? "up" : "down",
+    volatility: Math.abs(item.change),
+    currency: "USD",
+    source: "Market API"
+  }));
+
+  /* ===============================
+     SAVE JSON HISTORY
+  =============================== */
+
+  const history = getMarketHistory();
+  history.push(...marketSnapshot);
+
+  while (history.length > 50) {
+    history.shift();
+  }
+
+  saveMarketHistory(history);
+
+  /* ===============================
+     RENDER UI
+  =============================== */
+
   marketContainer.innerHTML = `
     <div class="market-grid">
-      ${data.map(item => `
+      ${marketSnapshot.map(item => `
         <div class="market-card">
           <h2>${item.name}</h2>
           <p><strong>Price:</strong> $${item.price}</p>
+          <p><small>${item.trend.toUpperCase()} trend</small></p>
           <p>
             <span class="${item.change >= 0 ? "positive" : "negative"}">
               ${item.change >= 0 ? "▲" : "▼"} ${item.change}
@@ -37,18 +79,23 @@ async function loadMarket() {
     </div>
   `;
 
-  // Update price history
-  data.forEach(item => {
-    priceHistory[item.name].push(item.price);
+  /* ===============================
+     UPDATE CHART FROM JSON
+  =============================== */
 
-    if (priceHistory[item.name].length > 10) {
-      priceHistory[item.name].shift();
-    }
-  });
+  marketSnapshot.forEach(item => {
+  if (!priceHistory[item.name]) {
+    priceHistory[item.name] = [];
+  }
 
+  priceHistory[item.name].push(item.price);
+
+  if (priceHistory[item.name].length > 10) {
+    priceHistory[item.name].shift();
+  }
+});
   updateChart();
 }
-
 function updateChart() {
   if (!chart) {
     chart = new Chart(ctx, {
@@ -87,3 +134,4 @@ function updateChart() {
 // Auto refresh every 30 seconds
 loadMarket();
 setInterval(loadMarket, 30000);
+window.addEventListener("focus", loadMarket);

@@ -63,6 +63,11 @@ h1, h2, h3 {
   font-family: var(--font-heading);
   margin-bottom: var(--spacing-md);
 }
+main {
+  padding: 40px 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
 
 
@@ -153,7 +158,68 @@ input:focus {
   text-align: center;
 }
 
+/* ===============================
+   DASHBOARD MODULE
+================================= */
 
+.dashboard-kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin: 40px 0;
+}
+section {
+  margin-bottom: 50px;
+}
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+
+.kpi-card {
+  background: #f4f7f9;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.kpi-card h2 {
+  font-size: 28px;
+  margin: 0;
+  color: #2c7a7b;
+}
+
+.dashboard-row {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+/* .card {
+  padding: 25px;
+  margin-bottom: 30px;
+  border-radius: 10px;
+} */
+
+#miniAnimalsChart {
+  width: 100%;
+  max-width: 600px;
+  height: 250px;
+}
+#welcomeMessage {
+  margin-bottom: 30px;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+#miniAnimalsChart {
+  margin-top: 15px;
+}
+.dashboard-kpis,
+.dashboard-grid {
+  width: 100%;
+}
 /* ===============================
    ANIMAL MODULE
 ================================= */
@@ -198,6 +264,7 @@ input:focus {
 .btn-delete:hover {
   opacity: 0.85;
 }
+
 /* ===============================
    MARKET MODULE
 ================================= */
@@ -422,6 +489,9 @@ form input {
 
 @media (max-width: 768px) {
 
+  main {
+    padding: 20px;
+  }
   .menu-toggle {
     display: flex;
   }
@@ -454,21 +524,32 @@ form input {
    NAVBAR ACTIVE LINK
 ================================= */
 
-.nav-links a.active {
-  color: var(--color-primary);
-  font-weight: 600;
+.nav-links a {
+  color: var(--color-white);
   position: relative;
 }
 
-.nav-links a.active::after {
+
+.nav-links a.active {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.nav-links a::after {
   content: "";
   position: absolute;
-  bottom: -4px;
   left: 0;
-  width: 100%;
+  bottom: -4px;
+  width: 0;
   height: 2px;
-  background: var(--color-primary);
-  border-radius: 2px;
+  background: var(--color-white);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  width: 100%;
 }
 
 /* ===============================

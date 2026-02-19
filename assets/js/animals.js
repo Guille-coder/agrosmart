@@ -1,4 +1,3 @@
-
 import { renderAnimals } from "./ui/animalUI.js";
 import { getAnimals, saveAnimals, getAnimalInfo } from "./services/animalService.js";
 

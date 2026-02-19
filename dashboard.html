@@ -32,12 +32,32 @@
   </div>
 </nav>
 
+
 <main>
   <h1>Welcome</h1>
   <p id="welcomeMessage"></p>
-  <div class="card" id="weatherCard">
-  <h2>Current Weather</h2>
-  <p id="weatherInfo">Loading weather...</p>
+  <h1>Dashboard Overview</h1>
+
+  <section class="dashboard-kpis" id="dashboardKPIs"></section>
+
+  <section class="dashboard-grid">
+    <div class="card" id="weatherCard">
+      <h2>Current Weather</h2>
+      <p id="weatherInfo">Loading weather...</p>
+    </div>
+
+    <div class="card" id="systemStatus">
+      <h2>System Status</h2>
+      <p id="statusInfo">Analyzing data...</p>
+    </div>
+  </section>
+  <div class="card">
+  <h2>Animal Distribution</h2>
+  <canvas id="miniAnimalsChart"></canvas>
+</div>
+<div class="card">
+  <h2>Operational Insights</h2>
+  <div id="systemInsights"></div>
 </div>
 </main>
 <footer class="footer">
